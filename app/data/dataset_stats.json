@@ -2,7 +2,7 @@
   "metrics": {
     "total_images": "500",
     "classes": "5",
-    "accuracy": "~95%",
+    "accuracy": "94%",
     "time_per_image": "~150ms"
   },
   "class_distribution": [

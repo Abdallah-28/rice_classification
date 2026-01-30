@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Script de démarrage avec Gunicorn (serveur WSGI production)
 
-echo "🚀 Démarrage de l'API avec Gunicorn..."
+echo "🚀 Demarrage de l'API avec Gunicorn..."
 
 gunicorn \
     --bind 0.0.0.0:5000 \

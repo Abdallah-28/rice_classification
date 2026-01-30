@@ -1,0 +1,24 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Installation des outils système nécessaires
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements_ui.txt .
+
+# On force la mise à jour de pip et l'installation propre
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements_ui.txt
+
+COPY . .
+
+# LA LIGNE MAGIQUE : Définit le chemin pour trouver 'src'
+ENV PYTHONPATH="/app:/app/app"
+
+EXPOSE 8501
+
+# Utilisation du chemin complet vers le module python pour plus de sécurité
+CMD ["python", "-m", "streamlit", "run", "app/app.py", "--server.port=8501", "--server.address=0.0.0.0"]

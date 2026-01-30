@@ -2,16 +2,19 @@ import streamlit as st
 from src.utils.helpers import load_css
 from src.ui.sidebar import render_sidebar
 from src.ui.tabs import render_tabs
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+css_path = os.path.join(BASE_DIR, "static", "style.css")
 
 def main():
     #Configuration de la page et chargement du CSS
     st.set_page_config(
         page_title="RiceVision AI",
-        page_icon="🌾",
         layout="wide",
         initial_sidebar_state="expanded"
     )
-    load_css("static/style.css")
+    load_css(css_path)
 
     #Affichage de la sidebar et recuperation des configurations
     api_url, show_probabilities, show_top3, show_confidence_gauge = render_sidebar()

@@ -8,7 +8,7 @@ def render_sidebar():
         api_url = st.text_input(
             "🔗 URL de l'API",
             value="http://localhost:5000",
-            help="127.0.0.1"
+            help="0.0.0.0"
         )
         
         st.markdown("---")
@@ -16,7 +16,7 @@ def render_sidebar():
         st.markdown("## 🔬 Mode d'Analyse")
         st.radio(
             "",
-            ["🎯 Analyse Rapide", "📊 Analyse Détaillee", "🔄 Analyse Comparative"],
+            ["🎯 Analyse Rapide", "📊 Analyse Detaillee", "🔄 Analyse Comparative"],
             index=0,
             key="analysis_mode"
         )
@@ -42,7 +42,6 @@ def render_sidebar():
                 """, unsafe_allow_html=True)
                 
                 with st.expander("📋 Détails"):
-                    # On affiche le JSON, le CSS s'occupe de la couleur
                     st.json(health_data)
             else:
                 st.markdown("""

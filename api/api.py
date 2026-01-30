@@ -33,7 +33,7 @@ try:
         class_indices = json.load(f)
 
     class_names = {v: k for k, v in class_indices.items()}
-    print("Modele et labels chargés avec succès.")
+    print("Modele et labels charges avec succes.")
 except Exception as e:
     print(f"Erreur lors du chargement des ressources : {e}")
 
@@ -87,9 +87,9 @@ def predict():
         })
 
     except Exception as e:
-        return jsonify({"error": f"Erreur lors de la prédiction : {str(e)}"}), 500
+        return jsonify({"error": f"Erreur lors de la prediction : {str(e)}"}), 500
 
 
 #Lancement app
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=5000, debug=False)

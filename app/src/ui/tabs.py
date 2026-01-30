@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import io
+import os
 import time
 from PIL import Image
 import json
@@ -26,11 +27,11 @@ def render_classification_tab(api_url, show_probabilities, show_top3, show_confi
         )
         
         if uploaded_file is not None:
-            # Afficher l'image
+            #Afficher l'image
             image = Image.open(uploaded_file)
             st.image(image, caption="Image téléchargee", use_container_width=True)
             
-            # Bouton d'analyse
+            #Bouton d'analyse
             st.markdown("""
                 <style>
                 div.stButton > button p {
@@ -113,7 +114,7 @@ def render_classification_tab(api_url, show_probabilities, show_top3, show_confi
                                 
                                 st.plotly_chart(fig_gauge, use_container_width=True)
                             
-                            # Top 3 prédictions
+                            # Top 3 predictions
                             if show_top3:
                                 st.markdown("""
                                     <div class="modern-card">
@@ -208,8 +209,13 @@ def render_classification_tab(api_url, show_probabilities, show_top3, show_confi
                 """, unsafe_allow_html=True)
 
 def render_data_analysis_tab():
-    with open('data/dataset_stats.json', 'r', encoding='utf-8') as f:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    
+    
+    with open(os.path.join(BASE_DIR, 'data', 'dataset_stats.json'), 'r', encoding='utf-8') as f:
         stats = json.load(f)
+    
+
     
     metrics = stats['metrics']
     class_dist = stats['class_distribution']
@@ -276,7 +282,8 @@ def render_data_analysis_tab():
         st.plotly_chart(fig_bar2, use_container_width=True)
 
 def render_rice_types_tab():
-    with open('data/rice_types.json', 'r', encoding='utf-8') as f:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    with open(os.path.join(BASE_DIR, 'data', 'rice_types.json'), 'r', encoding='utf-8') as f:
         rice_types = json.load(f)
     
     for rice in rice_types:
@@ -293,7 +300,7 @@ def render_rice_types_tab():
                 </div>
             </div>
         """, unsafe_allow_html=True)
-
+ #J'hesite a l'enlever
 def render_documentation_tab():
     st.markdown("""
         <div class="modern-card">
@@ -301,7 +308,7 @@ def render_documentation_tab():
         </div>
     """, unsafe_allow_html=True)
     
-    doc_tabs = st.tabs(["🧠 Modèle", "🔌 API", "🐳 Docker", "🚀 Déploiement"])
+    doc_tabs = st.tabs(["🧠 Modele", "🔌 API"])
     
     with doc_tabs[0]:
         st.markdown("""
@@ -310,10 +317,9 @@ def render_documentation_tab():
                 <ul style="line-height: 1.8;">
                     <li><strong>Type:</strong> VGG16 Transfer Learning</li>
                     <li><strong>Input:</strong> 224x224x3</li>
-                    <li><strong>Output:</strong> 5 classes (softmax)</li>
+                    <li><strong>Output:</strong> 5 classes </li>
                     <li><strong>Framework:</strong> TensorFlow/Keras</li>
                     <li><strong>Accuracy:</strong> ~95%</li>
-                    <li><strong>Paramètres:</strong> ~14M (trainable) + ~134M (frozen)</li>
                 </ul>
             </div>
         """, unsafe_allow_html=True)
@@ -327,53 +333,10 @@ def render_documentation_tab():
                     <li><code>GET /health</code> - Etat de l'API</li>
                     <li><code>POST /predict</code> - Classification</li>
                     <li><code>GET /classes</code> - Liste des classes</li>
-                    <li><code>GET /model-info</code> - Infos modele</li>
                 </ul>
             </div>
         """, unsafe_allow_html=True)
         
-        st.code("""
-# Exemple Python
-import requests
-
-with open('rice.jpg', 'rb') as f:
-    files = {'file': f}
-    response = requests.post('http://localhost:8000/predict', files=files)
-    print(response.json())
-        """, language="python")
-    
-    with doc_tabs[2]:
-        st.markdown("""
-            <div class="info-box">
-                <h3 style="color: #19124B; margin-bottom: 1rem;">Commandes Docker</h3>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        st.code("""
-# Build l'image
-docker build -t rice-api .
-
-# Lancer le conteneur
-docker run -d -p 8000:8000 --name rice-api rice-api
-
-# Docker Compose
-docker-compose up -d
-        """, language="bash")
-    
-    with doc_tabs[3]:
-        st.markdown("""
-            <div class="info-box">
-                <h3 style="color: #19124B; margin-bottom: 1rem;">Deploiement avec ngrok</h3>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        st.code("""
-# Lancer ngrok
-ngrok http 8000
-
-# Vous obtiendrez une URL publique
-# Exemple: https://xxxx.ngrok-free.app
-        """, language="bash")
 
 def render_tabs(api_url, show_probabilities, show_top3, show_confidence_gauge):
     tab1, tab2, tab3, tab4 = st.tabs([

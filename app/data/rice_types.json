@@ -2,36 +2,36 @@
     {
         "name": "Arborio",
         "emoji": "🍚",
-        "origin": "🇮🇹 Italie",
-        "characteristics": "Grain court et rond, très absorbant",
-        "usage": "Risotto"
+        "origin": "Italie",
+        "characteristics": "Grain court et rond, tres absorbant",
+        "usage": "Plats italiens"
     },
     {
         "name": "Basmati",
         "emoji": "🌾",
-        "origin": "🇮🇳 Inde / Pakistan",
-        "characteristics": "Grain long et fin, arôme distinctif",
+        "origin": "Inde / Pakistan",
+        "characteristics": "Grain long et fin, arome distinctif",
         "usage": "Plats indiens et pakistanais"
     },
     {
         "name": "Ipsala",
         "emoji": "🌿",
-        "origin": "🇹🇷 Turquie",
+        "origin": "Turquie",
         "characteristics": "Grain long, texture ferme",
-        "usage": "Pilaf"
+        "usage": "Plats Turques"
     },
     {
         "name": "Jasmine",
         "emoji": "🌸",
-        "origin": "🇹🇭 Thaïlande",
-        "characteristics": "Grain long, légèrement collant, parfumé",
+        "origin": "Thailande",
+        "characteristics": "Grain long, legerement collant, parfume",
         "usage": "Cuisine asiatique"
     },
     {
         "name": "Karacadag",
         "emoji": "⚡",
-        "origin": "🇹🇷 Turquie",
+        "origin": "Turquie",
         "characteristics": "Grain moyen, texture unique",
-        "usage": "Cuisine turque traditionnelle"
+        "usage": "Cuisine traditionnelle"
     }
 ]

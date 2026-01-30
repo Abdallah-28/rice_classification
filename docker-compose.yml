@@ -3,7 +3,7 @@ version: '2.40'
 services:
   api:
     build: .
-    container_name: rice-flask-api
+    container_name: rice_project
     ports:
       - "5000:5000"
     volumes:
